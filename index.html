@@ -37,7 +37,6 @@
                 <li>已达毕业要求，可随时到岗</li>
                 <li>国家奖学金 / 北京市三好学生 / 校级优秀党员</li>
               </ul>
-              <a class="button primary" href="#projects">查看项目</a>
             </aside>
             <section class="slide-right" aria-label="个人简介详情">
               <div class="resume-block">
@@ -53,7 +52,7 @@
               </div>
               <div class="resume-block">
                 <h2>项目经历：</h2>
-                <p><span>识别率 96% → 99.7%</span><b>脑控轮椅项目开发 · 总负责人</b><em>2024.09 - 2025.09</em></p>
+                <p><span>实验室项目</span><b>脑控轮椅项目开发</b><em>2024.09</em></p>
                 <p><span>个人项目</span><b>汽车知识库 RAG 问答系统</b><em>2026.02</em></p>
                 <p><span>个人项目</span><b>求职 Agent 智能助手</b><em>2026.05</em></p>
               </div>
@@ -80,10 +79,10 @@
             <span class="timeline-dot"></span>
             <div>
               <p class="item-meta">汽车之家 · 人工智能部 · 产品技术 · 2024年03月 - 2024年05月</p>
-              <h3>智能座舱语音与汽车知识库问答</h3>
+              <h3>智能座舱语音对话工作流</h3>
               <p>面向汽车销售与智能客服场景，接入百度智能云千帆平台与 DeepSeek 大模型，参与 ASR + LLM + TTS 语音对话流程配置，优化 Prompt 模板、上下文拼接与 ASR 结果纠偏，提升咨询场景下的回答相关性与连贯性。</p>
               <div class="tag-row">
-                <span>ASR</span><span>LLM</span><span>Prompt</span><span>RAG</span>
+                <span>ASR</span><span>LLM</span><span>TTS</span><span>Prompt</span><span>意图纠偏</span>
               </div>
             </div>
           </article>
@@ -112,7 +111,7 @@
           <article class="timeline-item">
             <span class="timeline-dot"></span>
             <div>
-              <p class="item-meta">项目开发 · 脑控轮椅 · 总负责人 · 2024年09月 - 2025年09月</p>
+              <p class="item-meta">项目开发 · 脑控轮椅 · 2024年09月 - 2025年09月</p>
               <h3>脑控轮椅与医疗陪护智能体</h3>
               <p>设计多尺度频域特征提取算法，通过注意力机制进行时空特征融合，将识别准确率从 96% 提升至 99.7%；基于九天智能体平台搭建“意图识别-医疗问答-情感陪护-信息推送”的多节点工作流。</p>
               <div class="tag-row">
@@ -152,7 +151,15 @@
               <h3 id="projectTitle">个人项目1：汽车知识库 RAG 问答系统</h3>
               <p id="projectDesc">基于汽车用户手册构建的 RAG 问答系统，支持汽车功能、配置及操作说明查询，提升用户检索效率与回答准确性。</p>
             </header>
-            <div class="project-visual-grid" id="projectVisuals">
+            <div class="project-visual-grid three-columns" id="projectVisuals">
+              <figure class="visual-card visual-info-card">
+                <figcaption>项目背景</figcaption>
+                <div class="visual-info-content">
+                  <article><strong>业务场景</strong><span>面向汽车用户手册问答，覆盖功能说明、配置查询、故障提示和操作步骤等高频咨询。</span></article>
+                  <article><strong>数据特点</strong><span>原始 PDF 存在跨页表格、章节层级和专业术语，直接切分容易造成语义断裂。</span></article>
+                  <article><strong>技术目标</strong><span>构建本地知识库检索链路，让用户输入自然语言问题后获得可追溯、低幻觉的回答。</span></article>
+                </div>
+              </figure>
               <figure class="visual-card">
                 <figcaption>系统界面</figcaption>
                 <img src="ppt_assets/image10.png" alt="智能座舱问答系统界面" />
