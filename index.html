@@ -187,12 +187,26 @@
             <section class="project-flow-section" id="projectFlowSection">
               <div class="project-section-label" id="projectFlowLabel">建模流程图</div>
               <div class="model-flow" id="projectFlowBody">
-                <article><span>01</span><strong>读取与对齐</strong><p>统一字段名与时间字段 acs_tm，过滤目标日期窗口。</p></article>
-                <article><span>02</span><strong>构建候选池</strong><p>合并历史可观测四元组、热门四元组、同细类扩展和转移候选。</p></article>
-                <article><span>03</span><strong>召回诊断</strong><p>在本地 holdout 上看 Recall@20/50/100，确认真实标签是否进入候选。</p></article>
-                <article><span>04</span><strong>特征工程</strong><p>统计用户偏好、近期窗口、行为转移、细类亲和、风险等级亲和。</p></article>
-                <article><span>05</span><strong>LightGBM 排序</strong><p>把用户-候选对作为样本，预测标签日命中概率。</p></article>
-                <article><span>06</span><strong>Top20 提交</strong><p>按概率排序，输出每个用户 20 条四元组预测。</p></article>
+                <article>
+                  <span>DATA</span><strong>数据切分</strong>
+                  <p>统一字段与时间窗口，把 3 月历史行为和 4 月 1 日标签严格分开。</p>
+                  <ul><li>train/test 读取</li><li>acs_tm 时间解析</li><li>历史窗口与标签日</li></ul>
+                </article>
+                <article>
+                  <span>RECALL</span><strong>候选召回</strong>
+                  <p>先让真实行为尽量进入候选池，再交给模型排序。</p>
+                  <ul><li>全局热门 Top150</li><li>用户历史四元组</li><li>行为转移统计</li><li>同产品细类扩展 24 个</li></ul>
+                </article>
+                <article>
+                  <span>FEATURE</span><strong>用户-候选特征</strong>
+                  <p>把每个用户和候选四元组组成样本，刻画偏好、近期性和转移关系。</p>
+                  <ul><li>global_score / user_score</li><li>recent_rank / lastday_rank</li><li>recent_trans</li><li>same_sub / risk affinity</li></ul>
+                </article>
+                <article>
+                  <span>RANK</span><strong>排序与提交</strong>
+                  <p>LightGBM 输出命中概率，按 NDCG@20 目标选择 Top20。</p>
+                  <ul><li>LightGBM 二分类排序</li><li>Holdout NDCG@20</li><li>Recall@20/50/100 诊断</li><li>生成 prediction.csv</li></ul>
+                </article>
               </div>
               <p class="flow-note" id="projectFlowNote">374 表示训练与测试历史中可观测到的行为四元组，不是硬编码边界；工程上可用合法产品维表扩展未见组合，再由排序模型过滤。</p>
             </section>

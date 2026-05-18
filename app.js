@@ -39,13 +39,31 @@ const projects = {
     flow: {
       label: "建模流程图",
       note: "374 表示训练与测试历史中可观测到的行为四元组，不是硬编码边界；工程上可用合法产品维表扩展未见组合，再由排序模型过滤。",
-      stages: [
-        { kicker: "01", title: "读取与对齐", detail: "统一字段名与时间字段 acs_tm，过滤目标日期窗口。" },
-        { kicker: "02", title: "构建候选池", detail: "合并历史可观测四元组、热门四元组、同细类扩展和转移候选。" },
-        { kicker: "03", title: "召回诊断", detail: "在本地 holdout 上看 Recall@20/50/100，确认真实标签是否进入候选。" },
-        { kicker: "04", title: "特征工程", detail: "统计用户偏好、近期窗口、行为转移、细类亲和、风险等级亲和。" },
-        { kicker: "05", title: "LightGBM 排序", detail: "把用户-候选对作为样本，预测标签日命中概率。" },
-        { kicker: "06", title: "Top20 提交", detail: "按概率排序，输出每个用户 20 条四元组预测。" }
+      groups: [
+        {
+          kicker: "DATA",
+          title: "数据切分",
+          detail: "统一字段与时间窗口，把 3 月历史行为和 4 月 1 日标签严格分开。",
+          items: ["train/test 读取", "acs_tm 时间解析", "历史窗口与标签日"]
+        },
+        {
+          kicker: "RECALL",
+          title: "候选召回",
+          detail: "先让真实行为尽量进入候选池，再交给模型排序。",
+          items: ["全局热门 Top150", "用户历史四元组", "行为转移统计", "同产品细类扩展 24 个"]
+        },
+        {
+          kicker: "FEATURE",
+          title: "用户-候选特征",
+          detail: "把每个用户和候选四元组组成样本，刻画偏好、近期性和转移关系。",
+          items: ["global_score / user_score", "recent_rank / lastday_rank", "recent_trans", "same_sub / risk affinity"]
+        },
+        {
+          kicker: "RANK",
+          title: "排序与提交",
+          detail: "LightGBM 输出命中概率，按 NDCG@20 目标选择 Top20。",
+          items: ["LightGBM 二分类排序", "Holdout NDCG@20", "Recall@20/50/100 诊断", "生成 prediction.csv"]
+        }
       ]
     },
     links: [],
@@ -250,8 +268,9 @@ function renderProjectFlow(flow) {
     return;
   }
   projectFlowLabel.textContent = flow.label || "流程图";
+  const groups = flow.groups || flow.stages || [];
   projectFlowBody.replaceChildren(
-    ...flow.stages.map((stage) => {
+    ...groups.map((stage) => {
       const article = document.createElement("article");
       const kicker = document.createElement("span");
       const title = document.createElement("strong");
@@ -260,6 +279,15 @@ function renderProjectFlow(flow) {
       title.textContent = stage.title;
       detail.textContent = stage.detail;
       article.append(kicker, title, detail);
+      if (stage.items?.length) {
+        const list = document.createElement("ul");
+        stage.items.forEach((text) => {
+          const item = document.createElement("li");
+          item.textContent = text;
+          list.appendChild(item);
+        });
+        article.appendChild(list);
+      }
       return article;
     })
   );
