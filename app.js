@@ -1,4 +1,52 @@
 const projects = {
+  behavior: {
+    title: "竞赛项目：客户行为序列预测与推荐排序模型",
+    desc: "基于脱敏客户历史行为序列，预测下一日最可能发生的行为四元组，并按 NDCG@20 优化 Top20 排序，最终线上得分 0.604。",
+    goals: [],
+    strategyLabel: "核心优化策略",
+    techLabel: "技术栈",
+    visuals: [
+      {
+        type: "metrics",
+        label: "结果与规模",
+        items: [
+          { value: "0.604", label: "线上 NDCG@20" },
+          { value: "374", label: "候选四元组" },
+          { value: "632万+", label: "训练行为记录" },
+          { value: "7.79万", label: "测试用户" }
+        ]
+      },
+      {
+        type: "pipeline",
+        label: "两阶段流程",
+        steps: [
+          { title: "时间切分", detail: "3月行为作历史，4月1日作标签" },
+          { title: "候选召回", detail: "热门、历史、转移、同细类扩展" },
+          { title: "排序建模", detail: "LightGBM 预测候选命中概率" },
+          { title: "Top20 输出", detail: "按分数排序生成提交文件" }
+        ]
+      },
+      {
+        type: "info",
+        label: "面试讲法",
+        items: [
+          { title: "不是端到端生成", detail: "利用候选空间小的特点，将问题转成候选项二分类排序。" },
+          { title: "先保证召回", detail: "Top20 分数上不去时，先看候选集是否覆盖真实行为。" },
+          { title: "指标驱动迭代", detail: "用用户 holdout 验证 NDCG@20，再调整召回和排序参数。" }
+        ]
+      }
+    ],
+    links: [],
+    strategies: [
+      { title: "问题建模", detail: "把行为类型、产品大类、产品细类、风险等级合并为一个行为四元组，预测用户下一日可能命中的 Top20 四元组。" },
+      { title: "召回层", detail: "融合全局热门、用户历史出现项、最近行为转移和同产品细类扩展，解决真实行为未进入候选集的问题。" },
+      { title: "排序特征", detail: "构造 global_score、user_score、recent_rank、lastday_rank、recent_trans、same_sub_affinity、risk_affinity 等用户-候选特征。" },
+      { title: "排序模型", detail: "用 LightGBM 二分类模型学习候选是否会在标签日发生，输出概率作为排序分数；最终 blend=0，直接采用模型分。" },
+      { title: "本地验证", detail: "按 user_id 做 holdout，使用 NDCG@20 评估排序，并用 Top20/50/100 召回诊断指导候选集扩展。" },
+      { title: "参数选择", detail: "最终使用 neg-per-user=50、top-global-neg=150、train-user-mod=2、same-sub-candidates=24，在速度和效果间取得平衡。" }
+    ],
+    techStack: ["Python", "Counter 特征", "LightGBM", "NDCG@20", "Recall@K", "CSV 流式处理"]
+  },
   rag: {
     title: "个人项目1：汽车知识库 RAG 问答系统",
     desc: "基于汽车用户手册构建的 RAG 问答系统，支持汽车功能、配置及操作说明查询，提升用户检索效率与回答准确性。",
@@ -190,6 +238,40 @@ function createVisualCard(visual) {
       content.appendChild(article);
     });
     figure.classList.add("visual-info-card");
+    figure.append(caption, content);
+    return figure;
+  }
+
+  if (visual.type === "metrics") {
+    const content = document.createElement("div");
+    content.className = "metric-grid";
+    visual.items.forEach((item) => {
+      const article = document.createElement("article");
+      const value = document.createElement("strong");
+      const label = document.createElement("span");
+      value.textContent = item.value;
+      label.textContent = item.label;
+      article.append(value, label);
+      content.appendChild(article);
+    });
+    figure.classList.add("visual-metric-card");
+    figure.append(caption, content);
+    return figure;
+  }
+
+  if (visual.type === "pipeline") {
+    const content = document.createElement("div");
+    content.className = "pipeline-flow";
+    visual.steps.forEach((step) => {
+      const article = document.createElement("article");
+      const title = document.createElement("strong");
+      const detail = document.createElement("span");
+      title.textContent = step.title;
+      detail.textContent = step.detail;
+      article.append(title, detail);
+      content.appendChild(article);
+    });
+    figure.classList.add("visual-pipeline-card");
     figure.append(caption, content);
     return figure;
   }

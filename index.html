@@ -53,6 +53,7 @@
               <div class="resume-block">
                 <h2>项目经历：</h2>
                 <p><span>实验室项目</span><b>脑控轮椅项目开发</b><em>2024.09</em></p>
+                <p><span>竞赛项目</span><b>客户行为序列预测与推荐排序模型</b><em>2026.05</em></p>
                 <p><span>个人项目</span><b>汽车知识库 RAG 问答系统</b><em>2026.02</em></p>
                 <p><span>个人项目</span><b>求职 Agent 智能助手</b><em>2026.05</em></p>
               </div>
@@ -129,63 +130,78 @@
         </div>
         <div class="project-layout">
           <div class="project-list" role="tablist" aria-label="项目列表">
-            <button class="project-tab active" type="button" data-project="rag" role="tab" aria-selected="true">
+            <button class="project-tab active" type="button" data-project="behavior" role="tab" aria-selected="true">
               <span>01</span>
+              客户行为序列预测与推荐排序模型
+            </button>
+            <button class="project-tab" type="button" data-project="rag" role="tab" aria-selected="false">
+              <span>02</span>
               汽车知识库 RAG 问答系统
             </button>
             <button class="project-tab" type="button" data-project="agent" role="tab" aria-selected="false">
-              <span>02</span>
+              <span>03</span>
               求职 Agent 智能助手
             </button>
             <button class="project-tab" type="button" data-project="aigc" role="tab" aria-selected="false">
-              <span>03</span>
+              <span>04</span>
               图像编辑流程优化
             </button>
             <button class="project-tab" type="button" data-project="wheelchair" role="tab" aria-selected="false">
-              <span>04</span>
+              <span>05</span>
               脑控轮椅与医疗陪护智能体
             </button>
           </div>
           <article class="project-detail project-slide" aria-live="polite">
             <header class="project-slide-head">
-              <h3 id="projectTitle">个人项目1：汽车知识库 RAG 问答系统</h3>
-              <p id="projectDesc">基于汽车用户手册构建的 RAG 问答系统，支持汽车功能、配置及操作说明查询，提升用户检索效率与回答准确性。</p>
+              <h3 id="projectTitle">竞赛项目：客户行为序列预测与推荐排序模型</h3>
+              <p id="projectDesc">基于脱敏客户历史行为序列，预测下一日最可能发生的行为四元组，并按 NDCG@20 优化 Top20 排序，最终线上得分 0.604。</p>
             </header>
             <div class="project-visual-grid three-columns" id="projectVisuals">
-              <figure class="visual-card visual-info-card">
-                <figcaption>项目背景</figcaption>
-                <div class="visual-info-content">
-                  <article><strong>业务场景</strong><span>面向汽车用户手册问答，覆盖功能说明、配置查询、故障提示和操作步骤等高频咨询。</span></article>
-                  <article><strong>数据特点</strong><span>原始 PDF 存在跨页表格、章节层级和专业术语，直接切分容易造成语义断裂。</span></article>
-                  <article><strong>技术目标</strong><span>构建本地知识库检索链路，让用户输入自然语言问题后获得可追溯、低幻觉的回答。</span></article>
+              <figure class="visual-card visual-metric-card">
+                <figcaption>结果与规模</figcaption>
+                <div class="metric-grid">
+                  <article><strong>0.604</strong><span>线上 NDCG@20</span></article>
+                  <article><strong>374</strong><span>候选四元组</span></article>
+                  <article><strong>632万+</strong><span>训练行为记录</span></article>
+                  <article><strong>7.79万</strong><span>测试用户</span></article>
                 </div>
               </figure>
-              <figure class="visual-card">
-                <figcaption>系统界面</figcaption>
-                <img src="ppt_assets/image10.png" alt="智能座舱问答系统界面" />
+              <figure class="visual-card visual-pipeline-card">
+                <figcaption>两阶段流程</figcaption>
+                <div class="pipeline-flow">
+                  <article><strong>时间切分</strong><span>3月行为作历史，4月1日作标签</span></article>
+                  <article><strong>候选召回</strong><span>热门、历史、转移、同细类扩展</span></article>
+                  <article><strong>排序建模</strong><span>LightGBM 预测候选命中概率</span></article>
+                  <article><strong>Top20 输出</strong><span>按分数排序生成提交文件</span></article>
+                </div>
               </figure>
-              <figure class="visual-card">
-                <figcaption>RAG 检索流程</figcaption>
-                <img src="ppt_assets/image9.png" alt="汽车知识库 RAG 检索流程" />
+              <figure class="visual-card visual-info-card">
+                <figcaption>面试讲法</figcaption>
+                <div class="visual-info-content">
+                  <article><strong>不是端到端生成</strong><span>利用候选空间小的特点，将问题转成候选项二分类排序。</span></article>
+                  <article><strong>先保证召回</strong><span>Top20 分数上不去时，先看候选集是否覆盖真实行为。</span></article>
+                  <article><strong>指标驱动迭代</strong><span>用用户 holdout 验证 NDCG@20，再调整召回和排序参数。</span></article>
+                </div>
               </figure>
             </div>
             <section class="project-strategy">
               <div class="project-section-label" id="projectStrategyLabel">核心优化策略</div>
               <div class="strategy-grid" id="projectStrategies">
-                <article><strong>多策略文本切分</strong><span>结合页面规则与滑动窗口，减少跨页信息断裂。</span></article>
-                <article><strong>混合检索</strong><span>FAISS 向量检索 + BM25 关键词检索双路结合。</span></article>
-                <article><strong>重排序优化</strong><span>使用 bge-reranker-large 对召回结果重排序。</span></article>
+                <article><strong>问题建模</strong><span>把行为类型、产品大类、产品细类、风险等级合并为一个行为四元组，预测用户下一日可能命中的 Top20 四元组。</span></article>
+                <article><strong>召回层</strong><span>融合全局热门、用户历史出现项、最近行为转移和同产品细类扩展，解决真实行为未进入候选集的问题。</span></article>
+                <article><strong>排序特征</strong><span>构造 global_score、user_score、recent_rank、lastday_rank、recent_trans、same_sub_affinity、risk_affinity 等用户-候选特征。</span></article>
+                <article><strong>排序模型</strong><span>用 LightGBM 二分类模型学习候选是否会在标签日发生，输出概率作为排序分数；最终 blend=0，直接采用模型分。</span></article>
+                <article><strong>本地验证</strong><span>按 user_id 做 holdout，使用 NDCG@20 评估排序，并用 Top20/50/100 召回诊断指导候选集扩展。</span></article>
+                <article><strong>参数选择</strong><span>最终使用 neg-per-user=50、top-global-neg=150、train-user-mod=2、same-sub-candidates=24，在速度和效果间取得平衡。</span></article>
               </div>
             </section>
             <section class="tech-stack-row">
               <div class="project-section-label" id="projectTechLabel">技术栈</div>
               <div class="tech-stack" id="projectTechStack">
-                <span>PyPDF2</span><span>LangChain</span><span>FAISS</span><span>BM25</span><span>bge-reranker-large</span><span>DashScope / Qwen API</span>
+                <span>Python</span><span>Counter 特征</span><span>LightGBM</span><span>NDCG@20</span><span>Recall@K</span><span>CSV 流式处理</span>
               </div>
             </section>
-            <div class="project-links" id="projectLinks">
-              <a class="demo-link" href="http://127.0.0.1:7860/" target="_blank" rel="noreferrer">打开智能座舱问答 Demo</a>
-            </div>
+            <div class="project-links" id="projectLinks" hidden></div>
           </article>
         </div>
       </section>

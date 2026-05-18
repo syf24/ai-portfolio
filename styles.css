@@ -419,7 +419,7 @@ main > .self-evaluation {
 
 .project-list {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 10px;
 }
 
@@ -607,6 +607,86 @@ main > .self-evaluation {
   background: linear-gradient(180deg, #f8fbff 0%, #fff 100%);
 }
 
+.visual-metric-card,
+.visual-pipeline-card {
+  padding: 50px 14px 14px;
+  background: #fbfdff;
+}
+
+.metric-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  height: 100%;
+  align-content: center;
+}
+
+.metric-grid article {
+  border: 1px solid #d6e5f8;
+  border-radius: 8px;
+  padding: 16px 10px;
+  background: #fff;
+  text-align: center;
+}
+
+.metric-grid strong,
+.metric-grid span,
+.pipeline-flow strong,
+.pipeline-flow span {
+  display: block;
+}
+
+.metric-grid strong {
+  margin-bottom: 4px;
+  color: #0b4a9f;
+  font-size: clamp(24px, 2.3vw, 34px);
+  line-height: 1;
+}
+
+.metric-grid span {
+  color: #334155;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.pipeline-flow {
+  display: grid;
+  height: 100%;
+  align-content: center;
+  gap: 9px;
+}
+
+.pipeline-flow article {
+  position: relative;
+  border: 1px solid #d6e5f8;
+  border-radius: 8px;
+  padding: 11px 12px 11px 42px;
+  background: #fff;
+}
+
+.pipeline-flow article::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 17px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 0 4px rgba(232, 137, 34, 0.18);
+}
+
+.pipeline-flow strong {
+  color: #0b4a9f;
+  font-size: 16px;
+}
+
+.pipeline-flow span {
+  color: #334155;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
 .visual-info-content {
   display: grid;
   height: 100%;
@@ -695,6 +775,10 @@ main > .self-evaluation {
 
 .project-links {
   margin-top: 12px;
+}
+
+.project-links[hidden] {
+  display: none;
 }
 
 .demo-link {
