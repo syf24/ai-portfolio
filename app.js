@@ -1,7 +1,7 @@
 const projects = {
   behavior: {
     title: "竞赛项目：客户行为序列预测与推荐排序模型",
-    desc: "基于脱敏客户历史行为序列，预测下一日最可能发生的行为四元组，并按 NDCG@20 优化 Top20 排序，最终线上得分 0.604。",
+    desc: "基于脱敏客户历史行为序列，动态构建候选四元组池，预测下一日最可能发生的行为并按 NDCG@20 优化 Top20 排序，最终线上得分 0.604。",
     goals: [],
     strategyLabel: "核心优化策略",
     techLabel: "技术栈",
@@ -11,7 +11,7 @@ const projects = {
         label: "结果与规模",
         items: [
           { value: "0.604", label: "线上 NDCG@20" },
-          { value: "374", label: "候选四元组" },
+          { value: "374", label: "可观测四元组" },
           { value: "632万+", label: "训练行为记录" },
           { value: "7.79万", label: "测试用户" }
         ]
@@ -30,15 +30,28 @@ const projects = {
         type: "info",
         label: "面试讲法",
         items: [
-          { title: "不是端到端生成", detail: "利用候选空间小的特点，将问题转成候选项二分类排序。" },
+          { title: "不是端到端生成", detail: "利用可观测四元组较少的特点，将问题转成候选项二分类排序。" },
           { title: "先保证召回", detail: "Top20 分数上不去时，先看候选集是否覆盖真实行为。" },
-          { title: "指标驱动迭代", detail: "用用户 holdout 验证 NDCG@20，再调整召回和排序参数。" }
+          { title: "未见组合兜底", detail: "若未来出现历史外四元组，可用合法产品维表扩候选，但要用召回率验证噪声。" }
         ]
       }
     ],
+    flow: {
+      label: "建模流程图",
+      note: "374 表示训练与测试历史中可观测到的行为四元组，不是硬编码边界；工程上可用合法产品维表扩展未见组合，再由排序模型过滤。",
+      stages: [
+        { kicker: "01", title: "读取与对齐", detail: "统一字段名与时间字段 acs_tm，过滤目标日期窗口。" },
+        { kicker: "02", title: "构建候选池", detail: "合并历史可观测四元组、热门四元组、同细类扩展和转移候选。" },
+        { kicker: "03", title: "召回诊断", detail: "在本地 holdout 上看 Recall@20/50/100，确认真实标签是否进入候选。" },
+        { kicker: "04", title: "特征工程", detail: "统计用户偏好、近期窗口、行为转移、细类亲和、风险等级亲和。" },
+        { kicker: "05", title: "LightGBM 排序", detail: "把用户-候选对作为样本，预测标签日命中概率。" },
+        { kicker: "06", title: "Top20 提交", detail: "按概率排序，输出每个用户 20 条四元组预测。" }
+      ]
+    },
     links: [],
     strategies: [
       { title: "问题建模", detail: "把行为类型、产品大类、产品细类、风险等级合并为一个行为四元组，预测用户下一日可能命中的 Top20 四元组。" },
+      { title: "候选边界", detail: "374 来自训练与测试历史中实际出现过的四元组；若有历史外新组合，可用合法产品维表做兜底扩展。" },
       { title: "召回层", detail: "融合全局热门、用户历史出现项、最近行为转移和同产品细类扩展，解决真实行为未进入候选集的问题。" },
       { title: "排序特征", detail: "构造 global_score、user_score、recent_rank、lastday_rank、recent_trans、same_sub_affinity、risk_affinity 等用户-候选特征。" },
       { title: "排序模型", detail: "用 LightGBM 二分类模型学习候选是否会在标签日发生，输出概率作为排序分数；最终 blend=0，直接采用模型分。" },
@@ -167,6 +180,10 @@ const projectTechStack = document.querySelector("#projectTechStack");
 const projectStrategyLabel = document.querySelector("#projectStrategyLabel");
 const projectTechLabel = document.querySelector("#projectTechLabel");
 const projectLinks = document.querySelector("#projectLinks");
+const projectFlowSection = document.querySelector("#projectFlowSection");
+const projectFlowLabel = document.querySelector("#projectFlowLabel");
+const projectFlowBody = document.querySelector("#projectFlowBody");
+const projectFlowNote = document.querySelector("#projectFlowNote");
 
 tabs.forEach((tab) => {
   tab.addEventListener("click", () => {
@@ -184,6 +201,7 @@ tabs.forEach((tab) => {
       ...(project.goals?.length ? [createGoalCard(project.goals, project.goalLabel)] : []),
       ...project.visuals.map(createVisualCard)
     );
+    renderProjectFlow(project.flow);
     projectStrategyLabel.textContent = project.strategyLabel || "核心工作";
     projectTechLabel.textContent = project.techLabel || "关键技术";
     projectStrategies.replaceChildren(
@@ -218,6 +236,37 @@ tabs.forEach((tab) => {
     projectLinks.hidden = !(project.links || []).length;
   });
 });
+
+function renderProjectFlow(flow) {
+  if (!projectFlowSection || !projectFlowBody) {
+    return;
+  }
+  projectFlowSection.hidden = !flow;
+  if (!flow) {
+    projectFlowBody.replaceChildren();
+    if (projectFlowNote) {
+      projectFlowNote.textContent = "";
+    }
+    return;
+  }
+  projectFlowLabel.textContent = flow.label || "流程图";
+  projectFlowBody.replaceChildren(
+    ...flow.stages.map((stage) => {
+      const article = document.createElement("article");
+      const kicker = document.createElement("span");
+      const title = document.createElement("strong");
+      const detail = document.createElement("p");
+      kicker.textContent = stage.kicker;
+      title.textContent = stage.title;
+      detail.textContent = stage.detail;
+      article.append(kicker, title, detail);
+      return article;
+    })
+  );
+  if (projectFlowNote) {
+    projectFlowNote.textContent = flow.note || "";
+  }
+}
 
 function createVisualCard(visual) {
   const figure = document.createElement("figure");

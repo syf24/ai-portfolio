@@ -154,14 +154,14 @@
           <article class="project-detail project-slide" aria-live="polite">
             <header class="project-slide-head">
               <h3 id="projectTitle">竞赛项目：客户行为序列预测与推荐排序模型</h3>
-              <p id="projectDesc">基于脱敏客户历史行为序列，预测下一日最可能发生的行为四元组，并按 NDCG@20 优化 Top20 排序，最终线上得分 0.604。</p>
+              <p id="projectDesc">基于脱敏客户历史行为序列，动态构建候选四元组池，预测下一日最可能发生的行为并按 NDCG@20 优化 Top20 排序，最终线上得分 0.604。</p>
             </header>
             <div class="project-visual-grid three-columns" id="projectVisuals">
               <figure class="visual-card visual-metric-card">
                 <figcaption>结果与规模</figcaption>
                 <div class="metric-grid">
                   <article><strong>0.604</strong><span>线上 NDCG@20</span></article>
-                  <article><strong>374</strong><span>候选四元组</span></article>
+                  <article><strong>374</strong><span>可观测四元组</span></article>
                   <article><strong>632万+</strong><span>训练行为记录</span></article>
                   <article><strong>7.79万</strong><span>测试用户</span></article>
                 </div>
@@ -178,16 +178,29 @@
               <figure class="visual-card visual-info-card">
                 <figcaption>面试讲法</figcaption>
                 <div class="visual-info-content">
-                  <article><strong>不是端到端生成</strong><span>利用候选空间小的特点，将问题转成候选项二分类排序。</span></article>
+                  <article><strong>不是端到端生成</strong><span>利用可观测四元组较少的特点，将问题转成候选项二分类排序。</span></article>
                   <article><strong>先保证召回</strong><span>Top20 分数上不去时，先看候选集是否覆盖真实行为。</span></article>
-                  <article><strong>指标驱动迭代</strong><span>用用户 holdout 验证 NDCG@20，再调整召回和排序参数。</span></article>
+                  <article><strong>未见组合兜底</strong><span>若未来出现历史外四元组，可用合法产品维表扩候选，但要用召回率验证噪声。</span></article>
                 </div>
               </figure>
             </div>
+            <section class="project-flow-section" id="projectFlowSection">
+              <div class="project-section-label" id="projectFlowLabel">建模流程图</div>
+              <div class="model-flow" id="projectFlowBody">
+                <article><span>01</span><strong>读取与对齐</strong><p>统一字段名与时间字段 acs_tm，过滤目标日期窗口。</p></article>
+                <article><span>02</span><strong>构建候选池</strong><p>合并历史可观测四元组、热门四元组、同细类扩展和转移候选。</p></article>
+                <article><span>03</span><strong>召回诊断</strong><p>在本地 holdout 上看 Recall@20/50/100，确认真实标签是否进入候选。</p></article>
+                <article><span>04</span><strong>特征工程</strong><p>统计用户偏好、近期窗口、行为转移、细类亲和、风险等级亲和。</p></article>
+                <article><span>05</span><strong>LightGBM 排序</strong><p>把用户-候选对作为样本，预测标签日命中概率。</p></article>
+                <article><span>06</span><strong>Top20 提交</strong><p>按概率排序，输出每个用户 20 条四元组预测。</p></article>
+              </div>
+              <p class="flow-note" id="projectFlowNote">374 表示训练与测试历史中可观测到的行为四元组，不是硬编码边界；工程上可用合法产品维表扩展未见组合，再由排序模型过滤。</p>
+            </section>
             <section class="project-strategy">
               <div class="project-section-label" id="projectStrategyLabel">核心优化策略</div>
               <div class="strategy-grid" id="projectStrategies">
                 <article><strong>问题建模</strong><span>把行为类型、产品大类、产品细类、风险等级合并为一个行为四元组，预测用户下一日可能命中的 Top20 四元组。</span></article>
+                <article><strong>候选边界</strong><span>374 来自训练与测试历史中实际出现过的四元组；若有历史外新组合，可用合法产品维表做兜底扩展。</span></article>
                 <article><strong>召回层</strong><span>融合全局热门、用户历史出现项、最近行为转移和同产品细类扩展，解决真实行为未进入候选集的问题。</span></article>
                 <article><strong>排序特征</strong><span>构造 global_score、user_score、recent_rank、lastday_rank、recent_trans、same_sub_affinity、risk_affinity 等用户-候选特征。</span></article>
                 <article><strong>排序模型</strong><span>用 LightGBM 二分类模型学习候选是否会在标签日发生，输出概率作为排序分数；最终 blend=0，直接采用模型分。</span></article>
