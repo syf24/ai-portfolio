@@ -174,6 +174,7 @@ const projects = {
           { src: "ppt_assets/image8.png", alt: "脑电信号频率与视觉刺激背景" }
         ]
       },
+      { label: "创新点", image: "ppt_assets/innovation.png", alt: "系数点阵范式创新点与实验结果" },
       { label: "项目框架", image: "ppt_assets/image5.png", alt: "基于 EEG 解码的脑控抓取系统整体框架" },
       { label: "算法框架", image: "ppt_assets/image4.png", alt: "多尺度 STFT 与 Transformer 脑电解码算法框架" }
     ],
