@@ -394,3 +394,5 @@ function createGoalCard(goals, labelText = "项目目标") {
   card.append(label, list);
   return card;
 }
+
+document.querySelector(".project-tab.active")?.click();

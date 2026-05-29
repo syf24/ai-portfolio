@@ -14,8 +14,8 @@
       </a>
       <nav aria-label="页面导航">
         <a href="#hero">简介</a>
-        <a href="#experience">经历</a>
         <a href="#projects">项目</a>
+        <a href="#experience">经历</a>
       </nav>
     </header>
 
@@ -70,59 +70,6 @@
         </div>
       </section>
 
-      <section class="experience" id="experience">
-        <div class="section-heading">
-          <p class="eyebrow">Experience</p>
-          <h2>实习与科研经历</h2>
-        </div>
-        <div class="timeline">
-          <article class="timeline-item">
-            <span class="timeline-dot"></span>
-            <div>
-              <p class="item-meta">汽车之家 · 人工智能部 · 产品技术 · 2024年03月 - 2024年05月</p>
-              <h3>智能座舱语音对话工作流</h3>
-              <p>面向汽车销售与智能客服场景，接入百度智能云千帆平台与 DeepSeek 大模型，参与 ASR + LLM + TTS 语音对话流程配置，优化 Prompt 模板、上下文拼接与 ASR 结果纠偏，提升咨询场景下的回答相关性与连贯性。</p>
-              <div class="tag-row">
-                <span>ASR</span><span>LLM</span><span>TTS</span><span>Prompt</span><span>意图纠偏</span>
-              </div>
-            </div>
-          </article>
-          <article class="timeline-item">
-            <span class="timeline-dot"></span>
-            <div>
-              <p class="item-meta">中国三星 · Vision Computing · AIGC应用开发 · 2025年12月 - 2026年02月</p>
-              <h3>AIGC 图像编辑稳定性与模型评测</h3>
-              <p>围绕三星手机相册原生编辑场景，设计 Prompt 结构约束、DINO 背景相似度筛选与多轮重试策略，引入泊松融合后处理，将内部测试编辑准确率由 65% 提升至 85%，并参与模型选型和指标评估。</p>
-              <div class="tag-row">
-                <span>AIGC</span><span>DINO</span><span>Poisson Blending</span><span>Evaluation</span>
-              </div>
-            </div>
-          </article>
-          <article class="timeline-item">
-            <span class="timeline-dot"></span>
-            <div>
-              <p class="item-meta">科研项目 · 脑控抓取物体</p>
-              <h3>脑电解码与遮挡感知影响研究</h3>
-              <p>面向脑控抓取任务，探索脑电解码模型、高密度刺激与遮挡物体对感知的影响，积累信号处理和模型结构设计经验。</p>
-              <div class="tag-row">
-                <span>EEG</span><span>STFT</span><span>Transformer</span><span>Decoding</span>
-              </div>
-            </div>
-          </article>
-          <article class="timeline-item">
-            <span class="timeline-dot"></span>
-            <div>
-              <p class="item-meta">项目开发 · 脑控轮椅 · 2024年09月 - 2025年09月</p>
-              <h3>脑控轮椅与医疗陪护智能体</h3>
-              <p>设计多尺度频域特征提取算法，通过注意力机制进行时空特征融合，将识别准确率从 96% 提升至 99.7%；基于九天智能体平台搭建“意图识别-医疗问答-情感陪护-信息推送”的多节点工作流。</p>
-              <div class="tag-row">
-                <span>Brain-Computer Interface</span><span>Attention</span><span>Agent Workflow</span><span>Healthcare AI</span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
       <section class="project-showcase" id="projects">
         <div class="section-heading">
           <p class="eyebrow">Projects</p>
@@ -130,31 +77,31 @@
         </div>
         <div class="project-layout">
           <div class="project-list" role="tablist" aria-label="项目列表">
-            <button class="project-tab active" type="button" data-project="behavior" role="tab" aria-selected="true">
+            <button class="project-tab active" type="button" data-project="rag" role="tab" aria-selected="true">
               <span>01</span>
-              客户行为序列预测与推荐排序模型
-            </button>
-            <button class="project-tab" type="button" data-project="rag" role="tab" aria-selected="false">
-              <span>02</span>
               汽车知识库 RAG 问答系统
             </button>
             <button class="project-tab" type="button" data-project="agent" role="tab" aria-selected="false">
-              <span>03</span>
+              <span>02</span>
               求职 Agent 智能助手
             </button>
             <button class="project-tab" type="button" data-project="aigc" role="tab" aria-selected="false">
-              <span>04</span>
+              <span>03</span>
               图像编辑流程优化
             </button>
             <button class="project-tab" type="button" data-project="wheelchair" role="tab" aria-selected="false">
-              <span>05</span>
+              <span>04</span>
               脑控轮椅与医疗陪护智能体
+            </button>
+            <button class="project-tab" type="button" data-project="behavior" role="tab" aria-selected="false">
+              <span>05</span>
+              客户行为序列预测与推荐排序模型
             </button>
           </div>
           <article class="project-detail project-slide" aria-live="polite">
             <header class="project-slide-head">
-              <h3 id="projectTitle">竞赛项目：客户行为序列预测与推荐排序模型</h3>
-              <p id="projectDesc">基于脱敏客户历史行为序列，动态构建候选四元组池，预测下一日最可能发生的行为并按 NDCG@20 优化 Top20 排序，最终线上得分 0.604。</p>
+              <h3 id="projectTitle">个人项目1：汽车知识库 RAG 问答系统</h3>
+              <p id="projectDesc">基于汽车用户手册构建的 RAG 问答系统，支持汽车功能、配置及操作说明查询，提升用户检索效率与回答准确性。</p>
             </header>
             <div class="project-visual-grid three-columns" id="projectVisuals">
               <figure class="visual-card visual-metric-card">
@@ -229,6 +176,59 @@
               </div>
             </section>
             <div class="project-links" id="projectLinks" hidden></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="experience" id="experience">
+        <div class="section-heading">
+          <p class="eyebrow">Experience</p>
+          <h2>实习与科研经历</h2>
+        </div>
+        <div class="timeline">
+          <article class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div>
+              <p class="item-meta">汽车之家 · 人工智能部 · 产品技术 · 2024年03月 - 2024年05月</p>
+              <h3>智能座舱语音对话工作流</h3>
+              <p>面向汽车销售与智能客服场景，接入百度智能云千帆平台与 DeepSeek 大模型，参与 ASR + LLM + TTS 语音对话流程配置，优化 Prompt 模板、上下文拼接与 ASR 结果纠偏，提升咨询场景下的回答相关性与连贯性。</p>
+              <div class="tag-row">
+                <span>ASR</span><span>LLM</span><span>TTS</span><span>Prompt</span><span>意图纠偏</span>
+              </div>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div>
+              <p class="item-meta">中国三星 · Vision Computing · AIGC应用开发 · 2025年12月 - 2026年02月</p>
+              <h3>AIGC 图像编辑稳定性与模型评测</h3>
+              <p>围绕三星手机相册原生编辑场景，设计 Prompt 结构约束、DINO 背景相似度筛选与多轮重试策略，引入泊松融合后处理，将内部测试编辑准确率由 65% 提升至 85%，并参与模型选型和指标评估。</p>
+              <div class="tag-row">
+                <span>AIGC</span><span>DINO</span><span>Poisson Blending</span><span>Evaluation</span>
+              </div>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div>
+              <p class="item-meta">科研项目 · 脑控抓取物体</p>
+              <h3>脑电解码与遮挡感知影响研究</h3>
+              <p>面向脑控抓取任务，探索脑电解码模型、高密度刺激与遮挡物体对感知的影响，积累信号处理和模型结构设计经验。</p>
+              <div class="tag-row">
+                <span>EEG</span><span>STFT</span><span>Transformer</span><span>Decoding</span>
+              </div>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div>
+              <p class="item-meta">项目开发 · 脑控轮椅 · 2024年09月 - 2025年09月</p>
+              <h3>脑控轮椅与医疗陪护智能体</h3>
+              <p>设计多尺度频域特征提取算法，通过注意力机制进行时空特征融合，将识别准确率从 96% 提升至 99.7%；基于九天智能体平台搭建“意图识别-医疗问答-情感陪护-信息推送”的多节点工作流。</p>
+              <div class="tag-row">
+                <span>Brain-Computer Interface</span><span>Attention</span><span>Agent Workflow</span><span>Healthcare AI</span>
+              </div>
+            </div>
           </article>
         </div>
       </section>
