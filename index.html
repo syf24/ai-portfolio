@@ -49,6 +49,7 @@
                 <h2>实习经历：</h2>
                 <p><span>2024.03 - 2024.05</span><b>人工智能部 产品技术</b><em>汽车之家</em></p>
                 <p><span>2025.12 - 2026.02</span><b>Vision Computing AIGC应用开发</b><em>中国三星</em></p>
+                <p><span>2026.05 - 至今</span><b>大模型训练数据 提效算法</b><em>字节跳动</em></p>
               </div>
               <div class="resume-block">
                 <h2>项目经历：</h2>
@@ -77,7 +78,7 @@
         </div>
         <div class="project-layout">
           <div class="project-list" role="tablist" aria-label="项目列表">
-            <button class="project-tab active" type="button" data-project="rag" role="tab" aria-selected="true">
+            <button class="project-tab" type="button" data-project="rag" role="tab" aria-selected="false">
               <span>01</span>
               汽车知识库 RAG 问答系统
             </button>
@@ -85,94 +86,95 @@
               <span>02</span>
               求职 Agent 智能助手
             </button>
-            <button class="project-tab" type="button" data-project="aigc" role="tab" aria-selected="false">
+            <button class="project-tab active" type="button" data-project="cmb" role="tab" aria-selected="true">
               <span>03</span>
+              招商银行比赛
+            </button>
+            <button class="project-tab" type="button" data-project="aigc" role="tab" aria-selected="false">
+              <span>04</span>
               图像编辑流程优化
             </button>
             <button class="project-tab" type="button" data-project="wheelchair" role="tab" aria-selected="false">
-              <span>04</span>
+              <span>05</span>
               脑控轮椅与医疗陪护智能体
             </button>
             <button class="project-tab" type="button" data-project="behavior" role="tab" aria-selected="false">
-              <span>05</span>
+              <span>06</span>
               客户行为序列预测与推荐排序模型
             </button>
           </div>
           <article class="project-detail project-slide" aria-live="polite">
             <header class="project-slide-head">
-              <h3 id="projectTitle">个人项目1：汽车知识库 RAG 问答系统</h3>
-              <p id="projectDesc">基于汽车用户手册构建的 RAG 问答系统，支持汽车功能、配置及操作说明查询，提升用户检索效率与回答准确性。</p>
+              <h3 id="projectTitle">招商银行比赛：小招喵账户管家</h3>
+              <p id="projectDesc">本项目围绕“让客户选择招商银行作为金融主账户”的目标，基于客户画像、资产持仓、APP访问、产品购买和转账交易等多源数据，构建了面向“存、贷、汇”三类核心需求的预测模型与经营策略体系。项目完成了数据清洗、特征工程、LightGBM建模、五折交叉验证和阈值优化，并将模型结果进一步转化为“客户价值 × 活跃度”的九宫格分层，结合模型评分与业务规则识别重点经营客群，形成差异化触达、产品推荐和客户经理经营建议。最终实现了从需求预测、客户画像、分层经营到B端客户经理助手和C端手机银行产品落地的完整闭环，为主账户客户识别、精细化经营和数智化服务提供了可解释、可落地的数据支撑。</p>
             </header>
-            <div class="project-visual-grid three-columns" id="projectVisuals">
-              <figure class="visual-card visual-metric-card">
-                <figcaption>结果与规模</figcaption>
-                <div class="metric-grid">
-                  <article><strong>0.604</strong><span>线上 NDCG@20</span></article>
-                  <article><strong>374</strong><span>可观测四元组</span></article>
-                  <article><strong>632万+</strong><span>训练行为记录</span></article>
-                  <article><strong>7.79万</strong><span>测试用户</span></article>
+            <div class="project-visual-grid" id="projectVisuals">
+              <figure class="visual-card visual-info-card">
+                <figcaption>产品定位</figcaption>
+                <div class="visual-info-content">
+                  <article><strong>产品名称</strong><span>小招喵账户管家，定位为招商银行手机银行内的专属账户管家。</span></article>
+                  <article><strong>核心目标</strong><span>通过财富、借贷、支付三维主账户分析，识别客户当前最值得关注的账户需求。</span></article>
+                  <article><strong>表达风格</strong><span>专业、克制、温暖、尊敬，先解释需求，再推荐服务。</span></article>
                 </div>
               </figure>
               <figure class="visual-card visual-pipeline-card">
-                <figcaption>两阶段流程</figcaption>
+                <figcaption>经营逻辑</figcaption>
                 <div class="pipeline-flow">
-                  <article><strong>时间切分</strong><span>3月行为作历史，4月1日作标签</span></article>
-                  <article><strong>候选召回</strong><span>热门、历史、转移、同细类扩展</span></article>
-                  <article><strong>排序建模</strong><span>LightGBM 预测候选命中概率</span></article>
-                  <article><strong>Top20 输出</strong><span>按分数排序生成提交文件</span></article>
+                  <article><strong>主账户诊断</strong><span>围绕财富、借贷、支付识别当前关系强弱与提升空间</span></article>
+                  <article><strong>需求解释</strong><span>把银行侧经营策略转译成客户能理解的需求分析</span></article>
+                  <article><strong>服务推荐</strong><span>按预测模型优先级输出服务，并默认展示第一优先级</span></article>
+                  <article><strong>行动闭环</strong><span>通过积分、客户经理承接和产品路径完成转化</span></article>
                 </div>
               </figure>
               <figure class="visual-card visual-info-card">
-                <figcaption>面试讲法</figcaption>
+                <figcaption>交付重点</figcaption>
                 <div class="visual-info-content">
-                  <article><strong>不是端到端生成</strong><span>利用可观测四元组较少的特点，将问题转成候选项二分类排序。</span></article>
-                  <article><strong>先保证召回</strong><span>Top20 分数上不去时，先看候选集是否覆盖真实行为。</span></article>
-                  <article><strong>未见组合兜底</strong><span>若未来出现历史外四元组，可用合法产品维表扩候选，但要用召回率验证噪声。</span></article>
+                  <article><strong>首页入口</strong><span>招行首页、小招 AI、生活页、我的页、积分页均可进入。</span></article>
+                  <article><strong>隐私保护</strong><span>总资产、涨跌金额、资产比例、业务数量默认隐藏，点击后再显示。</span></article>
+                  <article><strong>推荐机制</strong><span>按预测模型输出的财富/借贷/支付概率排序，避免硬推单一产品。</span></article>
                 </div>
               </figure>
             </div>
             <section class="project-flow-section" id="projectFlowSection">
-              <div class="project-section-label" id="projectFlowLabel">建模流程图</div>
+              <div class="project-section-label" id="projectFlowLabel">经营逻辑</div>
               <div class="model-flow" id="projectFlowBody">
                 <article>
-                  <span>DATA</span><strong>数据切分</strong>
-                  <p>统一字段与时间窗口，把 3 月历史行为和 4 月 1 日标签严格分开。</p>
-                  <ul><li>train/test 读取</li><li>acs_tm 时间解析</li><li>历史窗口与标签日</li></ul>
+                  <span>STEP 1</span><strong>主账户诊断</strong>
+                  <p>围绕财富、借贷、支付识别当前关系强弱与提升空间。</p>
+                  <ul><li>财富沉淀</li><li>借贷备用</li><li>支付绑卡</li></ul>
                 </article>
                 <article>
-                  <span>RECALL</span><strong>候选召回</strong>
-                  <p>先让真实行为尽量进入候选池，再交给模型排序。</p>
-                  <ul><li>全局热门 Top150</li><li>用户历史四元组</li><li>行为转移统计</li><li>同产品细类扩展 24 个</li></ul>
+                  <span>STEP 2</span><strong>需求解释</strong>
+                  <p>把银行侧经营策略转译成客户能理解的需求分析与服务建议。</p>
+                  <ul><li>先解释需求</li><li>再推荐服务</li><li>避免硬推</li></ul>
                 </article>
                 <article>
-                  <span>FEATURE</span><strong>用户-候选特征</strong>
-                  <p>把每个用户和候选四元组组成样本，刻画偏好、近期性和转移关系。</p>
-                  <ul><li>global_score / user_score</li><li>recent_rank / lastday_rank</li><li>recent_trans</li><li>same_sub / risk affinity</li></ul>
+                  <span>STEP 3</span><strong>服务推荐</strong>
+                  <p>按模型优先级输出服务，并默认展示第一优先级。</p>
+                  <ul><li>概率排序</li><li>最多 Top3</li><li>默认第一类业务</li></ul>
                 </article>
                 <article>
-                  <span>RANK</span><strong>排序与提交</strong>
-                  <p>LightGBM 输出命中概率，按 NDCG@20 目标选择 Top20。</p>
-                  <ul><li>LightGBM 二分类排序</li><li>Holdout NDCG@20</li><li>Recall@20/50/100 诊断</li><li>生成 prediction.csv</li></ul>
+                  <span>STEP 4</span><strong>行动闭环</strong>
+                  <p>通过积分、客户经理承接和产品路径完成转化闭环。</p>
+                  <ul><li>积分联动</li><li>客户经理承接</li><li>多入口触达</li></ul>
                 </article>
               </div>
-              <p class="flow-note" id="projectFlowNote">374 表示训练与测试历史中可观测到的行为四元组，不是硬编码边界；工程上可用合法产品维表扩展未见组合，再由排序模型过滤。</p>
+              <p class="flow-note" id="projectFlowNote">该方案围绕财富、借贷、支付三维主账户展开，强调“先解释需求，再推荐服务”，并通过多入口承接、积分联动和隐私保护提升客户体验。</p>
             </section>
             <section class="project-strategy">
-              <div class="project-section-label" id="projectStrategyLabel">核心优化策略</div>
+              <div class="project-section-label" id="projectStrategyLabel">方案亮点</div>
               <div class="strategy-grid" id="projectStrategies">
-                <article><strong>问题建模</strong><span>把行为类型、产品大类、产品细类、风险等级合并为一个行为四元组，预测用户下一日可能命中的 Top20 四元组。</span></article>
-                <article><strong>候选边界</strong><span>374 来自训练与测试历史中实际出现过的四元组；若有历史外新组合，可用合法产品维表做兜底扩展。</span></article>
-                <article><strong>召回层</strong><span>融合全局热门、用户历史出现项、最近行为转移和同产品细类扩展，解决真实行为未进入候选集的问题。</span></article>
-                <article><strong>排序特征</strong><span>构造 global_score、user_score、recent_rank、lastday_rank、recent_trans、same_sub_affinity、risk_affinity 等用户-候选特征。</span></article>
-                <article><strong>排序模型</strong><span>用 LightGBM 二分类模型学习候选是否会在标签日发生，输出概率作为排序分数；最终 blend=0，直接采用模型分。</span></article>
-                <article><strong>本地验证</strong><span>按 user_id 做 holdout，使用 NDCG@20 评估排序，并用 Top20/50/100 召回诊断指导候选集扩展。</span></article>
-                <article><strong>参数选择</strong><span>最终使用 neg-per-user=50、top-global-neg=150、train-user-mod=2、same-sub-candidates=24，在速度和效果间取得平衡。</span></article>
+                <article><strong>三维主账户</strong><span>围绕财富、借贷、支付拆解客户关系，而不是只做单一营销入口。</span></article>
+                <article><strong>客户陪伴型文案</strong><span>采用有温度、有尊敬感的表达，先讲需求，再讲服务建议。</span></article>
+                <article><strong>模型排序</strong><span>让系统按主账户概率优先展示内容，降低打扰感，提高推荐命中率。</span></article>
+                <article><strong>积分联动</strong><span>把完成服务动作后的激励并入招行既有积分体系，提升复访和行动完成率。</span></article>
+                <article><strong>灰态展示</strong><span>对非主链路外部功能采用灰色蒙版，减少误点和流程干扰。</span></article>
               </div>
             </section>
             <section class="tech-stack-row">
-              <div class="project-section-label" id="projectTechLabel">技术栈</div>
+              <div class="project-section-label" id="projectTechLabel">方案关键词</div>
               <div class="tech-stack" id="projectTechStack">
-                <span>Python</span><span>Counter 特征</span><span>LightGBM</span><span>NDCG@20</span><span>Recall@K</span><span>CSV 流式处理</span>
+                <span>产品方案设计</span><span>主账户经营</span><span>需求识别</span><span>推荐排序</span><span>交互原型</span><span>合规表达</span>
               </div>
             </section>
             <div class="project-links" id="projectLinks" hidden></div>
@@ -205,6 +207,28 @@
               <p>围绕三星手机相册原生编辑场景，设计 Prompt 结构约束、DINO 背景相似度筛选与多轮重试策略，引入泊松融合后处理，将内部测试编辑准确率由 65% 提升至 85%，并参与模型选型和指标评估。</p>
               <div class="tag-row">
                 <span>AIGC</span><span>DINO</span><span>Poisson Blending</span><span>Evaluation</span>
+              </div>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div>
+              <p class="item-meta">字节跳动 · 大模型训练数据 提效算法 · 2026年05月03日 - 至今</p>
+              <h3>大模型训练数据质检与自动化处理</h3>
+              <p>面向大模型训练数据质量保障场景，负责入模数据质检与自动化处理，保障高批量数据的准确性与一致性；主导图像质检算法研发，构建 OCR 检测、特征抽取与二分类质检端到端 pipeline，将不合格类精确率由 91% 提升至 93%+，并独立设计落地飞书多维表格自动化质检机器人，引入断点续传与幂等重试机制，保障长任务中断后无损恢复。</p>
+              <div class="tag-row">
+                <span>Data Quality</span><span>OCR</span><span>Binary Classification</span><span>Automation</span><span>Feishu</span>
+              </div>
+            </div>
+          </article>
+          <article class="timeline-item">
+            <span class="timeline-dot"></span>
+            <div>
+              <p class="item-meta">招商银行 · 客户金融主账户数智化产品方案 · 2026年07月</p>
+              <h3>小招喵账户管家比赛方案</h3>
+              <p>围绕财富、借贷、支付三维主账户设计账户陪伴型经营方案，将银行侧主账户策略转译为客户可理解的需求分析与服务建议，并通过模型排序、积分联动和多入口承接完成转化闭环。</p>
+              <div class="tag-row">
+                <span>主账户经营</span><span>产品方案</span><span>需求识别</span><span>推荐排序</span>
               </div>
             </div>
           </article>
