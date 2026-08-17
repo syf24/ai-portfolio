@@ -1,18 +1,19 @@
 const projects = {
   cmb: {
-    title: "招商银行比赛：小招喵账户管家",
-    desc: "本项目围绕“让客户选择招商银行作为金融主账户”的目标，基于客户画像、资产持仓、APP访问、产品购买和转账交易等多源数据，构建了面向“存、贷、汇”三类核心需求的预测模型与经营策略体系。项目完成了数据清洗、特征工程、LightGBM建模、五折交叉验证和阈值优化，并将模型结果进一步转化为“客户价值 × 活跃度”的九宫格分层，结合模型评分与业务规则识别重点经营客群，形成差异化触达、产品推荐和客户经理经营建议。最终实现了从需求预测、客户画像、分层经营到B端客户经理助手和C端手机银行产品落地的完整闭环，为主账户客户识别、精细化经营和数智化服务提供了可解释、可落地的数据支撑。",
+    title: "招商银行比赛：客户行为预测与主账户经营",
+    desc: "基于脱敏客户行为序列构建候选召回与 LightGBM 排序模型，以 NDCG@20 优化下一日 Top20 行为预测，线上得分 0.604；进一步将预测结果转化为财富、借贷、支付三维主账户经营策略，形成从需求识别、客群分层到产品推荐与客户经理承接的完整闭环。",
     goals: [],
     strategyLabel: "方案亮点",
     techLabel: "方案关键词",
     visuals: [
       {
-        type: "info",
-        label: "产品定位",
+        type: "metrics",
+        label: "建模结果",
         items: [
-          { title: "产品名称", detail: "小招喵账户管家，定位为招商银行手机银行内的专属账户管家。" },
-          { title: "核心目标", detail: "通过财富、借贷、支付三维主账户分析，识别客户当前最值得关注的账户需求。" },
-          { title: "表达风格", detail: "专业、克制、温暖、尊敬，先解释需求，再推荐服务。" }
+          { value: "0.604", label: "线上 NDCG@20" },
+          { value: "632万+", label: "训练行为记录" },
+          { value: "7.79万", label: "测试用户" },
+          { value: "Top20", label: "推荐输出" }
         ]
       },
       {
@@ -37,13 +38,14 @@ const projects = {
     ],
     links: [],
     strategies: [
+      { title: "序列预测", detail: "融合全局热门、用户历史、行为转移与同细类扩展完成候选召回，再用 LightGBM 学习排序。" },
       { title: "三维主账户", detail: "围绕财富、借贷、支付拆解客户关系，而不是只做单一营销入口。" },
       { title: "客户陪伴型文案", detail: "采用有温度、有尊敬感的表达，先讲需求，再讲服务建议。" },
       { title: "模型排序", detail: "让系统按主账户概率优先展示内容，降低打扰感，提高推荐命中率。" },
       { title: "积分联动", detail: "把完成服务动作后的激励并入招行既有积分体系，提升复访和行动完成率。" },
       { title: "灰态展示", detail: "对非主链路外部功能采用灰色蒙版，减少误点和流程干扰。" }
     ],
-    techStack: ["产品方案设计", "主账户经营", "需求识别", "推荐排序", "交互原型", "合规表达"]
+    techStack: ["Python", "LightGBM", "NDCG@20", "候选召回", "主账户经营", "推荐排序", "产品方案设计"]
   },
   behavior: {
     title: "竞赛项目：客户行为序列预测与推荐排序模型",
@@ -123,6 +125,47 @@ const projects = {
       { title: "参数选择", detail: "最终使用 neg-per-user=50、top-global-neg=150、train-user-mod=2、same-sub-candidates=24，在速度和效果间取得平衡。" }
     ],
     techStack: ["Python", "Counter 特征", "LightGBM", "NDCG@20", "Recall@K", "CSV 流式处理"]
+  },
+  byte: {
+    title: "把算法做成可持续运行的生产力",
+    desc: "围绕大模型训练数据质量与团队效率，完成从算法建模、自动化工具到信息运营平台的端到端交付。",
+    goals: [],
+    strategyLabel: "四条工作主线",
+    techLabel: "技术栈",
+    visuals: [
+      {
+        type: "metrics",
+        label: "核心成果",
+        items: [
+          { value: "95.3%", label: "不合格样本 Precision" },
+          { value: "≈4.7%", label: "待审核池混入率" },
+          { value: "≈0.15s", label: "候选摘要耗时" },
+          { value: "83%", label: "自动化工具提效" }
+        ]
+      },
+      { label: "AI 资讯运营平台", image: "assets/bytedance/editor-console.png", alt: "字节跳动 AI 资讯运营平台界面" },
+      { label: "多平台监测台", image: "assets/bytedance/monitor-console.png", alt: "多平台账号与话题监测台界面" },
+      { label: "AI 资讯聚合门户", image: "assets/bytedance/ai-news-feed.png", alt: "AI 资讯聚合与分类推荐界面" },
+      { label: "新人引导机器人", image: "assets/bytedance/onboarding-bot.png", alt: "新人引导机器人消息编辑与预览界面" }
+    ],
+    flow: {
+      label: "端到端交付链路",
+      note: "从质量问题识别到工具化与运营化落地，覆盖算法研发、工程可靠性、产品界面和团队实际使用。",
+      groups: [
+        { kicker: "QUALITY", title: "图像质量建模", detail: "把文字可读性扩展为真实性、清晰度与 3D 几何合理性判断。", items: ["35 维质量特征", "LightGBM", "阈值精调"] },
+        { kicker: "RELIABILITY", title: "批处理自动化", detail: "让附件处理任务在令牌失效、限流和中断后仍能继续。", items: ["自动续期", "并行下载", "幂等恢复"] },
+        { kicker: "SIGNAL", title: "信息聚合", detail: "统一多平台监测与 38 个资讯源，完成抓取、归一化和摘要。", items: ["多源抓取", "分类推荐", "亚秒级摘要"] },
+        { kicker: "DELIVERY", title: "运营与触达", detail: "将选稿、编辑、配图、卡片预览和飞书推送收敛到一个工作台。", items: ["运营选稿", "真实预览", "定向发送"] }
+      ]
+    },
+    links: [],
+    strategies: [
+      { title: "图像质检算法", detail: "融合 OCR 可读性、旋转镜像一致性、文字锐度、平面度与边界穿透等 35 维特征，将 Precision 从 91.0% 提升至 95.3%。" },
+      { title: "可靠批处理", detail: "通过令牌自动续期、并行下载、断点重试与幂等去重，让长任务中断后无损恢复，单轮耗时由约 70 分钟降至 40 分钟。" },
+      { title: "AI Signal 平台", detail: "统一多平台监测与 38 个资讯源，本地摘要替代大模型批处理，将候选生成由 10–15 分钟降至约 0.15 秒。" },
+      { title: "运营与协作自动化", detail: "实现选稿、摘要编辑、配图、卡片预览、定向推送与新人引导，形成内容运营和团队协作闭环。" }
+    ],
+    techStack: ["Python", "OCR", "LightGBM", "Feature Engineering", "Concurrency", "Vue 3", "Feishu API"]
   },
   rag: {
     title: "个人项目1：汽车知识库 RAG 问答系统",
@@ -237,6 +280,14 @@ const projects = {
 };
 
 const tabs = document.querySelectorAll(".project-tab");
+const projectSnapshots = {
+  rag: ["汽车手册专业问答", "独立开发", "混合检索 + 重排序", "回答可追溯"],
+  agent: ["毕业生求职管理", "产品设计与全栈开发", "多智能体 + 人工确认", "任务状态可恢复"],
+  cmb: ["银行主账户经营", "算法与产品方案", "召回排序 + 分层经营", "NDCG@20 0.604"],
+  aigc: ["手机相册原生编辑", "AIGC 应用开发", "筛选重试 + 融合后处理", "准确率 65% → 85%"],
+  wheelchair: ["脑机控制与医疗陪护", "算法与工作流开发", "EEG 解码 + Agent", "识别率 99.7%"],
+  byte: ["大模型训练数据质量", "提效算法实习生", "质检模型 + 自动化平台", "Precision 95.3%"]
+};
 const projectTitle = document.querySelector("#projectTitle");
 const projectDesc = document.querySelector("#projectDesc");
 const projectVisuals = document.querySelector("#projectVisuals");
@@ -249,6 +300,19 @@ const projectFlowSection = document.querySelector("#projectFlowSection");
 const projectFlowLabel = document.querySelector("#projectFlowLabel");
 const projectFlowBody = document.querySelector("#projectFlowBody");
 const projectFlowNote = document.querySelector("#projectFlowNote");
+const projectSnapshot = document.querySelector("#projectSnapshot");
+const currentProjectIndex = document.querySelector("#currentProjectIndex");
+const projectDetail = document.querySelector("#projectDetail");
+
+tabs.forEach((tab) => tab.setAttribute("aria-controls", "projectDetail"));
+
+function selectAdjacentProject(direction) {
+  const tabList = [...tabs];
+  const activeIndex = tabList.findIndex((tab) => tab.classList.contains("active"));
+  const nextIndex = (activeIndex + direction + tabList.length) % tabList.length;
+  tabList[nextIndex]?.click();
+  tabList[nextIndex]?.focus();
+}
 
 tabs.forEach((tab) => {
   tab.addEventListener("click", () => {
@@ -256,9 +320,17 @@ tabs.forEach((tab) => {
     tabs.forEach((item) => {
       item.classList.toggle("active", item === tab);
       item.setAttribute("aria-selected", item === tab ? "true" : "false");
+      item.tabIndex = item === tab ? 0 : -1;
     });
+    const selectedIndex = [...tabs].indexOf(tab);
+    if (currentProjectIndex) currentProjectIndex.textContent = String(selectedIndex + 1).padStart(2, "0");
+    const tabList = tab.parentElement;
+    if (tabList && tabList.scrollWidth > tabList.clientWidth) {
+      tabList.scrollTo({ left: tab.offsetLeft - tabList.offsetLeft - 14, behavior: "smooth" });
+    }
     projectTitle.textContent = project.title;
     projectDesc.textContent = project.desc;
+    renderProjectSnapshot(tab.dataset.project);
     projectVisuals.classList.toggle("with-goals", Boolean(project.goals?.length));
     projectVisuals.classList.toggle("wide-visuals", Boolean(project.goals?.length && project.visuals.length >= 3));
     projectVisuals.classList.toggle("three-columns", !project.goals?.length && project.visuals.length >= 3);
@@ -299,8 +371,47 @@ tabs.forEach((tab) => {
       })
     );
     projectLinks.hidden = !(project.links || []).length;
+    if (projectDetail) {
+      projectDetail.classList.remove("is-updating");
+      void projectDetail.offsetWidth;
+      projectDetail.classList.add("is-updating");
+    }
+  });
+  tab.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      event.preventDefault();
+      selectAdjacentProject(1);
+    }
+    if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      event.preventDefault();
+      selectAdjacentProject(-1);
+    }
   });
 });
+
+document.querySelector("#previousProject")?.addEventListener("click", () => selectAdjacentProject(-1));
+document.querySelector("#nextProject")?.addEventListener("click", () => selectAdjacentProject(1));
+
+document.querySelectorAll("[data-project-link]").forEach((link) => {
+  link.addEventListener("click", () => {
+    document.querySelector(`.project-tab[data-project="${link.dataset.projectLink}"]`)?.click();
+  });
+});
+
+function renderProjectSnapshot(projectKey) {
+  if (!projectSnapshot) return;
+  const labels = ["业务场景", "我的角色", "核心方案", "关键结果"];
+  const values = projectSnapshots[projectKey] || [];
+  projectSnapshot.replaceChildren(...labels.map((label, index) => {
+    const card = document.createElement("article");
+    const caption = document.createElement("span");
+    const value = document.createElement("strong");
+    caption.textContent = label;
+    value.textContent = values[index] || "—";
+    card.append(caption, value);
+    return card;
+  }));
+}
 
 const activeTab = document.querySelector(".project-tab.active") || tabs[0];
 if (activeTab) {
@@ -446,4 +557,16 @@ function createGoalCard(goals, labelText = "项目目标") {
   return card;
 }
 
-document.querySelector(".project-tab.active")?.click();
+const contactMenu = document.querySelector(".contact-menu");
+document.addEventListener("click", (event) => {
+  if (contactMenu?.open && !contactMenu.contains(event.target)) {
+    contactMenu.removeAttribute("open");
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && contactMenu?.open) {
+    contactMenu.removeAttribute("open");
+    contactMenu.querySelector("summary")?.focus();
+  }
+});

@@ -6,16 +6,21 @@
     <title>宋依凡 | AI 应用开发</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body class="home-page">
     <header class="topbar">
       <a class="brand" href="#hero" aria-label="回到顶部">
         <span class="brand-mark">SYF</span>
         <span>AI Application Developer</span>
       </a>
       <nav aria-label="页面导航">
-        <a href="#hero">简介</a>
-        <a href="#projects">项目</a>
-        <a href="#experience">经历</a>
+        <details class="contact-menu">
+          <summary class="nav-cta">联系我</summary>
+          <div class="contact-popover">
+            <img src="assets/wechat-qr.jpg" alt="宋依凡的微信二维码" />
+            <strong>微信联系</strong>
+            <span>扫码添加好友</span>
+          </div>
+        </details>
       </nav>
     </header>
 
@@ -29,6 +34,7 @@
           <div class="slide-grid">
             <aside class="slide-left">
               <h1>个人简介</h1>
+              <p class="profile-role">AI APPLICATION · ALGORITHM · PRODUCT</p>
               <img src="assets/profile.jpg" alt="宋依凡证件照" />
               <ul class="slide-highlights">
                 <li><strong>宋依凡</strong> · 27届硕士研究生 · 北京海淀</li>
@@ -47,16 +53,16 @@
               </div>
               <div class="resume-block">
                 <h2>实习经历：</h2>
-                <p><span>2024.03 - 2024.05</span><b>人工智能部 产品技术</b><em>汽车之家</em></p>
-                <p><span>2025.12 - 2026.02</span><b>Vision Computing AIGC应用开发</b><em>中国三星</em></p>
                 <p><span>2026.05 - 至今</span><b>大模型训练数据 提效算法</b><em>字节跳动</em></p>
+                <p><span>2025.12 - 2026.02</span><b>Vision Computing AIGC应用开发</b><em>中国三星</em></p>
+                <p><span>2024.03 - 2024.05</span><b>人工智能部 产品技术</b><em>汽车之家</em></p>
               </div>
               <div class="resume-block">
                 <h2>项目经历：</h2>
-                <p><span>实验室项目</span><b>脑控轮椅项目开发</b><em>2024.09</em></p>
                 <p><span>竞赛项目</span><b>客户行为序列预测与推荐排序模型</b><em>2026.05</em></p>
-                <p><span>个人项目</span><b>汽车知识库 RAG 问答系统</b><em>2026.02</em></p>
                 <p><span>个人项目</span><b>求职 Agent 智能助手</b><em>2026.05</em></p>
+                <p><span>个人项目</span><b>汽车知识库 RAG 问答系统</b><em>2026.02</em></p>
+                <p><span>实验室项目</span><b>脑控轮椅项目开发</b><em>2024.09</em></p>
               </div>
               <div class="resume-block">
                 <h2>已发表成果：</h2>
@@ -71,6 +77,84 @@
         </div>
       </section>
 
+      <section class="byte-work byte-preview" id="bytedance" hidden>
+        <div class="section-heading byte-heading">
+          <div>
+            <p class="eyebrow">Selected Work · ByteDance</p>
+            <h2>把算法做成可持续运行的生产力</h2>
+          </div>
+          <div class="preview-copy">
+            <p class="section-intro">围绕大模型训练数据质量与团队效率，完成从算法建模、自动化工具到信息运营平台的端到端交付。</p>
+          </div>
+        </div>
+
+        <div class="impact-strip" aria-label="字节跳动实习成果概览">
+          <article><strong>95.3%</strong><span>不合格样本 Precision</span><small>较旧模型 +4.3pp</small></article>
+          <article><strong>≈ 4.7%</strong><span>待审核池混入率</span><small>由 8.98% 近乎减半</small></article>
+          <article><strong>≈ 0.15s</strong><span>候选摘要耗时</span><small>原流程约 10–15 分钟</small></article>
+          <article><strong>83%</strong><span>自动化工具提效</span><small>约节省 0.25 人力 / 周</small></article>
+        </div>
+
+        <div class="work-stories">
+          <article class="work-story quality-story">
+            <div class="story-copy">
+              <span class="story-no">01 · QUALITY ALGORITHM</span>
+              <h3>让质检从“看得见字”走向“判断真实质量”</h3>
+              <p>围绕 3D 图像中的文字有效性、清晰度与几何合理性，构建 35 维质量特征与 LightGBM 二分类链路。</p>
+              <div class="story-metric"><strong>91.0%</strong><i>→</i><strong>95.3%</strong><span>不合格样本 Precision</span></div>
+              <div class="story-tags"><span>OCR</span><span>LightGBM</span><span>阈值精调</span><span>跨环境部署</span></div>
+            </div>
+            <div class="quality-visual" aria-label="质检算法步骤">
+              <div><small>INPUT</small><strong>图像输入</strong><span>待质检 3D 视图</span></div>
+              <i>→</i>
+              <div><small>FEATURE</small><strong>35 维特征</strong><span>OCR · 几何 · 质量</span></div>
+              <i>→</i>
+              <div><small>MODEL</small><strong>LightGBM</strong><span>分层验证与重加权</span></div>
+              <i>→</i>
+              <div class="quality-output"><small>OUTPUT</small><strong>95.3%</strong><span>Precision</span></div>
+            </div>
+          </article>
+
+          <article class="work-story">
+            <div class="story-copy">
+              <span class="story-no">02 · AI SIGNAL</span>
+              <h3>把分散的信息源，变成一条可运营的内容流水线</h3>
+              <p>统一多平台监测与 38 个资讯源，通过抓取、归一化、摘要和分类，让团队在一个入口完成信息发现。</p>
+              <ul><li>账号与话题订阅统一管理</li><li>近 7 天资讯聚合与分类推荐</li><li>候选摘要由分钟级降至约 0.15 秒</li></ul>
+            </div>
+            <div class="story-visual-pair">
+              <a class="story-screen" href="assets/bytedance/monitor-console.png" target="_blank" rel="noreferrer"><img src="assets/bytedance/monitor-console.png" alt="多平台账号与话题监测台界面" loading="lazy" /></a>
+              <a class="story-screen story-screen-secondary" href="assets/bytedance/ai-news-feed.png" target="_blank" rel="noreferrer"><img src="assets/bytedance/ai-news-feed.png" alt="AI 资讯聚合门户界面" loading="lazy" /></a>
+            </div>
+          </article>
+
+          <article class="work-story story-reverse">
+            <div class="story-copy">
+              <span class="story-no">03 · CONTENT OPERATIONS</span>
+              <h3>选稿、编辑、预览与推送，在同一个工作台闭环</h3>
+              <p>运营可以筛选本周精选、调整顺序、编辑标题与摘要、配置图片，并在发送前查看飞书卡片的真实结构。</p>
+              <div class="story-tags"><span>Vue 3</span><span>Python</span><span>TextRank</span><span>Feishu Card</span></div>
+            </div>
+            <div class="story-visual-pair">
+              <a class="story-screen" href="assets/bytedance/editor-console.png" target="_blank" rel="noreferrer"><img src="assets/bytedance/editor-console.png" alt="AI 资讯运营选稿台界面" loading="lazy" /></a>
+              <a class="story-screen story-screen-secondary" href="assets/bytedance/card-preview.png" target="_blank" rel="noreferrer"><img src="assets/bytedance/card-preview.png" alt="飞书卡片结构化预览界面" loading="lazy" /></a>
+            </div>
+          </article>
+
+          <article class="work-story onboarding-story">
+            <div class="story-copy">
+              <span class="story-no">04 · WORKFLOW AUTOMATION</span>
+              <h3>让重复协作变成可配置、可预览的自动化服务</h3>
+              <p>将模板变量、目标人群、定时触达和学习反馈整合进新人引导机器人；同时完善令牌续期、并行处理与幂等恢复。</p>
+              <div class="story-metric"><strong>83%</strong><span>自动化工具提效</span></div>
+            </div>
+            <div class="story-screen onboarding-crop">
+              <img src="assets/bytedance/onboarding-bot.png" alt="新人引导机器人消息编辑和预览界面" loading="lazy" />
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section class="project-showcase" id="projects">
         <div class="section-heading">
           <p class="eyebrow">Projects</p>
@@ -79,35 +163,35 @@
         <div class="project-layout">
           <div class="project-list" role="tablist" aria-label="项目列表">
             <button class="project-tab" type="button" data-project="rag" role="tab" aria-selected="false">
-              <span>01</span>
-              汽车知识库 RAG 问答系统
+              <span>01</span><span class="tab-copy"><strong>汽车知识库 RAG 问答系统</strong><small>个人项目 · 可追溯问答</small></span>
             </button>
             <button class="project-tab" type="button" data-project="agent" role="tab" aria-selected="false">
-              <span>02</span>
-              求职 Agent 智能助手
+              <span>02</span><span class="tab-copy"><strong>求职 Agent 智能助手</strong><small>个人项目 · 多智能体工作流</small></span>
             </button>
             <button class="project-tab active" type="button" data-project="cmb" role="tab" aria-selected="true">
-              <span>03</span>
-              招商银行比赛
+              <span>03</span><span class="tab-copy"><strong>招商银行比赛：预测与经营</strong><small>竞赛项目 · NDCG@20 0.604</small></span>
             </button>
             <button class="project-tab" type="button" data-project="aigc" role="tab" aria-selected="false">
-              <span>04</span>
-              图像编辑流程优化
+              <span>04</span><span class="tab-copy"><strong>图像编辑流程优化</strong><small>三星实习 · 准确率 65% → 85%</small></span>
             </button>
             <button class="project-tab" type="button" data-project="wheelchair" role="tab" aria-selected="false">
-              <span>05</span>
-              脑控轮椅与医疗陪护智能体
+              <span>05</span><span class="tab-copy"><strong>脑控轮椅与医疗陪护智能体</strong><small>科研项目 · 识别率 99.7%</small></span>
             </button>
-            <button class="project-tab" type="button" data-project="behavior" role="tab" aria-selected="false">
-              <span>06</span>
-              客户行为序列预测与推荐排序模型
+            <button class="project-tab" type="button" data-project="byte" role="tab" aria-selected="false">
+              <span>06</span><span class="tab-copy"><strong>字节跳动：数据质检与提效</strong><small>实习项目 · Precision 95.3%</small></span>
             </button>
           </div>
-          <article class="project-detail project-slide" aria-live="polite">
+          <article class="project-detail project-slide" id="projectDetail" aria-live="polite">
             <header class="project-slide-head">
-              <h3 id="projectTitle">招商银行比赛：小招喵账户管家</h3>
-              <p id="projectDesc">本项目围绕“让客户选择招商银行作为金融主账户”的目标，基于客户画像、资产持仓、APP访问、产品购买和转账交易等多源数据，构建了面向“存、贷、汇”三类核心需求的预测模型与经营策略体系。项目完成了数据清洗、特征工程、LightGBM建模、五折交叉验证和阈值优化，并将模型结果进一步转化为“客户价值 × 活跃度”的九宫格分层，结合模型评分与业务规则识别重点经营客群，形成差异化触达、产品推荐和客户经理经营建议。最终实现了从需求预测、客户画像、分层经营到B端客户经理助手和C端手机银行产品落地的完整闭环，为主账户客户识别、精细化经营和数智化服务提供了可解释、可落地的数据支撑。</p>
+              <h3 id="projectTitle">招商银行比赛：客户行为预测与主账户经营</h3>
+              <p id="projectDesc">基于脱敏客户行为序列构建候选召回与 LightGBM 排序模型，以 NDCG@20 优化下一日 Top20 行为预测；进一步将模型结果转化为财富、借贷、支付三维主账户经营策略，形成从需求预测、客群分层到产品推荐的完整闭环。</p>
             </header>
+            <section class="project-snapshot" id="projectSnapshot" aria-label="项目概览">
+              <article><span>业务场景</span><strong>银行主账户经营</strong></article>
+              <article><span>我的角色</span><strong>算法与产品方案</strong></article>
+              <article><span>核心方案</span><strong>召回排序 + 分层经营</strong></article>
+              <article><span>关键结果</span><strong>NDCG@20 0.604</strong></article>
+            </section>
             <div class="project-visual-grid" id="projectVisuals">
               <figure class="visual-card visual-info-card">
                 <figcaption>产品定位</figcaption>
@@ -182,7 +266,7 @@
         </div>
       </section>
 
-      <section class="experience" id="experience">
+      <section class="experience" id="experience" hidden>
         <div class="section-heading">
           <p class="eyebrow">Experience</p>
           <h2>实习与科研经历</h2>
@@ -215,7 +299,7 @@
             <div>
               <p class="item-meta">字节跳动 · 大模型训练数据 提效算法 · 2026年05月03日 - 至今</p>
               <h3>大模型训练数据质检与自动化处理</h3>
-              <p>面向大模型训练数据质量保障场景，负责入模数据质检与自动化处理，保障高批量数据的准确性与一致性；主导图像质检算法研发，构建 OCR 检测、特征抽取与二分类质检端到端 pipeline，将不合格类精确率由 91% 提升至 93%+，并独立设计落地飞书多维表格自动化质检机器人，引入断点续传与幂等重试机制，保障长任务中断后无损恢复。</p>
+              <p>面向大模型训练数据质量保障场景，负责入模数据质检与自动化处理；主导图像质检算法研发，构建 OCR、质量/合规特征与二分类端到端 pipeline，将不合格类 Precision 从 91.0% 提升至 95.3%，待审核池混入率由 8.98% 降至约 4.7%；独立落地批处理机器人与 AI 资讯运营平台，完善并发、断点恢复和内容分发链路。</p>
               <div class="tag-row">
                 <span>Data Quality</span><span>OCR</span><span>Binary Classification</span><span>Automation</span><span>Feishu</span>
               </div>
@@ -257,15 +341,6 @@
         </div>
       </section>
 
-      <section class="self-evaluation" aria-label="自我评价">
-        <div class="section-heading">
-          <p class="eyebrow">Self Review</p>
-          <h2>自我评价</h2>
-        </div>
-        <p>
-          熟练掌握 C++、Python，具备较强抗压能力和技术热情；擅长使用大模型完成代码应用工作，能够把算法、工具调用和业务流程结合成可落地的 AI 应用。
-        </p>
-      </section>
     </main>
 
     <footer>
