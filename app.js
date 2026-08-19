@@ -324,6 +324,9 @@ tabs.forEach((tab) => {
     });
     const selectedIndex = [...tabs].indexOf(tab);
     if (currentProjectIndex) currentProjectIndex.textContent = String(selectedIndex + 1).padStart(2, "0");
+    document.querySelectorAll(".project-outline [data-project-link]").forEach((link) => {
+      link.classList.toggle("outline-current", link.dataset.projectLink === tab.dataset.project);
+    });
     const tabList = tab.parentElement;
     if (tabList && tabList.scrollWidth > tabList.clientWidth) {
       tabList.scrollTo({ left: tab.offsetLeft - tabList.offsetLeft - 14, behavior: "smooth" });
@@ -570,3 +573,21 @@ document.addEventListener("keydown", (event) => {
     contactMenu.querySelector("summary")?.focus();
   }
 });
+
+const sectionLinks = [...document.querySelectorAll('.topbar nav a[href^="#"]')];
+const observedSections = sectionLinks
+  .map((link) => document.querySelector(link.getAttribute("href")))
+  .filter(Boolean);
+
+if ("IntersectionObserver" in window && observedSections.length) {
+  const sectionObserver = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter((entry) => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (!visible) return;
+    sectionLinks.forEach((link) => {
+      link.classList.toggle("nav-current", link.getAttribute("href") === `#${visible.target.id}`);
+    });
+  }, { rootMargin: "-20% 0px -60%", threshold: [0.05, 0.25, 0.5] });
+  observedSections.forEach((section) => sectionObserver.observe(section));
+}
