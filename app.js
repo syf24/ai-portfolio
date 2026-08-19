@@ -186,9 +186,7 @@ const projects = {
       { label: "系统界面", image: "ppt_assets/image10.png", alt: "智能座舱问答系统界面" },
       { label: "RAG 检索流程", image: "ppt_assets/image9.png", alt: "汽车知识库 RAG 检索流程" }
     ],
-    links: [
-      { label: "打开智能座舱问答 Demo", href: "http://127.0.0.1:7860/" }
-    ],
+    links: [],
     strategies: [
       { title: "多策略文本切分", detail: "结合页面规则与滑动窗口，有效减少跨页信息断裂，保证上下文完整性。" },
       { title: "混合检索", detail: "FAISS 向量检索 + BM25 关键词检索双路结合，提高专业术语与功能名称召回效果。" },
@@ -206,9 +204,7 @@ const projects = {
       { label: "系统界面", image: "assets/job-agent-preview.svg", alt: "求职备考行动台界面预览" },
       { label: "LangGraph 总体流程", image: "assets/agent-workflow.svg", alt: "求职 Agent LangGraph 总体流程图" }
     ],
-    links: [
-      { label: "打开求职备考行动台", href: "http://127.0.0.1:8765/" }
-    ],
+    links: [],
     strategies: [
       { title: "Daily Companion Graph", detail: "加载 data.json 与 memory.json，分析今日任务、投递状态和天气节奏，生成每日规划。" },
       { title: "Resume PDF Graph", detail: "解析 JD、匹配个人经历与技能关键词，生成定制化简历内容。" },
@@ -334,6 +330,7 @@ tabs.forEach((tab) => {
     projectTitle.textContent = project.title;
     projectDesc.textContent = project.desc;
     renderProjectSnapshot(tab.dataset.project);
+    projectVisuals.dataset.project = tab.dataset.project;
     projectVisuals.classList.toggle("with-goals", Boolean(project.goals?.length));
     projectVisuals.classList.toggle("wide-visuals", Boolean(project.goals?.length && project.visuals.length >= 3));
     projectVisuals.classList.toggle("three-columns", !project.goals?.length && project.visuals.length >= 3);
